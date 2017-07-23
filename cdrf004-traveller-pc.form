@@ -1,0 +1,132 @@
+;; traveller-chars.form - Traveller Character Form, v0.5 -*- forms -*-
+     
+     ;; This provides a form for storing Classic Traveller Characters, v0.5
+     ;; Downloaded from cdr255.com.
+     
+     ;; Set the name of the data file.
+     (setq forms-file "chars-traveller.dat")
+     
+     ;; Use forms-enumerate to set field names and number thereof.
+     (setq forms-number-of-fields
+           (forms-enumerate
+            '(char-name
+	      char-date
+	      char-player
+	      char-upp
+	      char-str
+	      char-dex
+	      char-end
+	      char-int
+	      char-edu
+	      char-soc
+	      char-title
+	      char-rank
+	      char-birthday
+	      char-age-mods
+	      char-birthworld
+	      char-service
+	      char-branch
+	      char-dischargeworld
+	      char-terms
+	      char-final-rank
+	      char-retired
+	      char-retirement-pay
+	      char-special-assignments
+	      char-awards
+	      char-equipment
+	      char-primary-skill
+	      char-secondary-skill
+	      char-other-skill
+	      char-preferred-weapon
+	      char-preferred-pistol
+	      char-preferred-blade
+	      char-travellers-member
+	      char-psi-date
+	      char-psi-psr
+	      char-psi-train
+	      char-psi-train-date
+	      char-psi-talents
+	      char-write-up
+	      )))
+     
+     ;; The following functions are used by this form for layout purposes.
+     ;;
+     (defun arch-tocol (target &optional fill)
+       "Produces a string to skip to column TARGET.
+     Prepends newline if needed.
+     The optional FILL should be a character, used to fill to the column."
+       (if (null fill)
+           (setq fill ? ))
+       (if (< target (current-column))
+           (concat "\n" (make-string target fill))
+         (make-string (- target (current-column)) fill)))
+     ;;
+     (defun arch-rj (target field &optional fill)
+       "Produces a string to skip to column TARGET\
+      minus the width of field FIELD.
+     Prepends newline if needed.
+     The optional FILL should be a character,
+     used to fill to the column."
+       (arch-tocol (- target (length (nth field forms-fields))) fill))
+     
+     ;; Record filters.
+     ;;
+     (defun new-record-filter (the-record)
+       "Form a new record with some defaults."
+       (aset the-record char-upp "777777")
+       (aset the-record char-player "Christopher Rodriguez")
+       the-record)                           ; return it
+     (setq forms-new-record-filter 'new-record-filter)
+     
+     ;; The format list.
+     (setq forms-format-list
+          (list
+            "====== Classic Travellers Character Sheet ======\n\n"
+            "Name: "                 char-name
+            " - "                    char-date                   
+	    "\n\n"
+	    "UPP: "                  char-upp
+	    "\n\n"
+	    "Created By: "           char-player
+	    "\n\n"
+            '(arch-tocol 70 ?-)
+            "\n== Detailed Characteristics ==\n\n"
+	    "Strength:        "            char-str
+	    "\nDexterity:       "          char-dex
+	    "\nEndurance:       "          char-end
+	    "\nIntelligence:    "          char-int
+	    "\nEducation:       "          char-edu
+	    "\nSocial Standing: "          char-soc
+            "\n\n== Personal History ==\n"
+	    "\nNoble Title:   "            char-title
+	    "  Military Rank: "             char-rank
+	    "  Birthdate:     "             char-birthday
+	    "\nAge Modifiers: "            char-age-mods
+	    "  Birthworld:    "            char-birthworld
+	    "\n\n== Service History ==\n"
+	    "\nService: "                  char-service
+	    "  Branch: "                   char-branch
+	    "  Discharging World: "        char-dischargeworld
+	    "\nTerms Served: "             char-terms
+	    "  Final Rank: "               char-final-rank
+	    "  Retired?: "                 char-retired
+	    "  Retirement Pay: "           char-retirement-pay
+	    "\nSpecial Assignments:\n"     char-special-assignments
+	    "\nAwards and Decorations:\n"  char-awards
+	    "\nEquipment Qualified On:\n"  char-equipment
+	    "\nPrimary Skill: "            char-primary-skill
+	    "  Secondary Skill: "          char-secondary-skill
+	    "\nAdditional Skills:\n"       char-other-skill
+	    "\nPreferred - Weapon: "       char-preferred-weapon
+	    "  Pistol: "                   char-preferred-pistol
+	    "  Blade: "                    char-preferred-blade
+	    "\nTravellers' Membership?: "  char-travellers-member
+	    "\n\n== Psionics ==\n"
+	    "\nDate of Test: "             char-psi-date
+	    "  PSR: "                      char-psi-psr
+	    "  Trained?: "                 char-psi-train
+	    "  Date Training Completed: "  char-psi-train-date
+	    "\nTalents & Current Levels:\n"char-psi-talents
+	    "\n\n== Write Up ==\n"
+	    char-write-up
+	    ))

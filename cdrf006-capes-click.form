@@ -1,0 +1,75 @@
+;; character-details.form - Flesh Out Characters, v1.0 -*- forms -*-
+     
+     ;; This provides a form for the Character Detail Sheet, v1.0
+     
+     ;; Set the name of the data file.
+     (setq forms-file "capes-clicks.dat")
+     
+     ;; Use forms-enumerate to set field names and number thereof.
+     (setq forms-number-of-fields
+           (forms-enumerate
+            '(click-name
+	      click-base
+	      click-creator
+	      click-type
+	      click-left-1
+	      click-right-1
+	      click-left-2
+	      click-right-2
+	      click-left-3
+	      click-right-3
+	      click-left-4
+	      click-right-4
+	      click-left-5
+	      click-right-5
+)))
+     
+     ;; The following functions are used by this form for layout purposes.
+     ;;
+     (defun arch-tocol (target &optional fill)
+       "Produces a string to skip to column TARGET.
+     Prepends newline if needed.
+     The optional FILL should be a character, used to fill to the column."
+       (if (null fill)
+           (setq fill ? ))
+       (if (< target (current-column))
+           (concat "\n" (make-string target fill))
+         (make-string (- target (current-column)) fill)))
+     ;;
+     (defun arch-rj (target field &optional fill)
+       "Produces a string to skip to column TARGET\
+      minus the width of field FIELD.
+     Prepends newline if needed.
+     The optional FILL should be a character,
+     used to fill to the column."
+       (arch-tocol (- target (length (nth field forms-fields))) fill))
+     
+     ;; Record filters.
+     ;;
+     (defun new-record-filter (the-record)
+       "Form a new record with some defaults."
+       (aset the-record click-name "Iron Man")
+       (aset the-record click-base "Tony Stark")
+       the-record)                           ; return it
+     (setq forms-new-record-filter 'new-record-filter)
+     
+     ;; The format list.
+     (setq forms-format-list
+          (list
+            "====== Click and Lock Module ======\n\n"
+            "Name: "                 click-name
+            " - "                    click-base
+	    "\n\n"
+	    "Created By: "           click-creator
+	    "\n\n"
+            '(arch-tocol 70 ?-)
+            "\n== Module Type: "     click-type
+	    " ==\n\n"
+	    "+------------------------------+------------------------------+\n"
+	    "| " click-left-1 "| " click-right-1 "|\n"
+	    "| " click-left-2 "| " click-right-2 "|\n"
+	    "| " click-left-3 "| " click-right-3 "|\n"
+	    "| " click-left-4 "| " click-right-4 "|\n"
+	    "| " click-left-5 "| " click-right-5 "|\n"
+	    "+------------------------------+------------------------------+\n"
+))

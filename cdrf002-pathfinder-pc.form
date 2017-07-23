@@ -1,0 +1,573 @@
+;; pathfinder-chars.form - Pathfinder Character Sheet, v1.0 -*- forms -*-
+     
+     ;; This provides a form based Character Sheet for Pathfinder.
+     ;; Downloaded from cdr255.com.
+     
+     ;; Set the name of the data file.
+     (setq forms-file "chars-pathfinder.dat")
+     
+     ;; Use forms-enumerate to set field names and number thereof.
+     (setq forms-number-of-fields
+           (forms-enumerate
+            '(char-name                       
+	      char-player                     
+	      char-created
+	      char-campaign
+	      ; 5
+	      char-level                      
+	      char-sex                        
+	      char-gender                     
+	      char-sexual-orient              
+	      char-height
+	      ; 10
+	      char-weight
+	      char-hair
+	      char-eyes
+	      char-skin                       
+	      char-handedness
+	      ; 15
+	      char-nation
+	      char-religion
+	      char-alignment
+	      char-age 
+	      char-race       
+					; 20
+	      char-lang
+	      char-personality
+	      char-str
+	      char-str-mod
+	      char-str-base
+					; 25
+	      char-str-race
+	      char-str-enhance
+	      char-str-misc
+	      char-dex
+	      char-dex-mod
+					; 30
+	      char-dex-base
+	      char-dex-race
+	      char-dex-enhance
+	      char-dex-misc
+	      char-con
+					; 35
+	      char-con-mod
+	      char-con-base
+	      char-con-race
+	      char-con-enhance
+	      char-con-misc
+					; 40
+	      char-int
+	      char-int-mod
+	      char-int-base
+	      char-int-race
+	      char-int-enhance
+					; 45
+	      char-int-misc
+	      char-wis
+	      char-wis-mod
+	      char-wis-base
+	      char-wis-race
+					; 50
+	      char-wis-enhance
+	      char-wis-misc
+	      char-cha
+	      char-cha-mod
+	      char-cha-base
+					; 55
+	      char-cha-race
+	      char-cha-enhance
+	      char-cha-misc
+	      char-class1-name
+	      char-class1-bab
+	      char-class1-skill
+	      char-class1-fort
+	      char-class1-ref
+	      char-class1-will
+	      char-class1-hd
+	      char-class1-hpgain
+	      char-class2-name
+	      char-class2-bab
+	      char-class2-skill
+	      char-class2-fort
+	      char-class2-ref
+	      char-class2-will
+	      char-class2-hd
+	      char-class2-hpgain
+	      char-class3-name
+	      char-class3-bab
+	      char-class3-skill
+	      char-class3-fort
+	      char-class3-ref
+	      char-class3-will
+	      char-class3-hd
+	      char-class3-hpgain
+	      char-class4-name
+	      char-class4-bab
+	      char-class4-skill
+	      char-class4-fort
+	      char-class4-ref
+	      char-class4-will
+	      char-class4-hd
+	      char-class4-hpgain
+	      char-class5-name
+	      char-class5-bab
+	      char-class5-skill
+	      char-class5-fort
+	      char-class5-ref
+	      char-class5-will
+	      char-class5-hd
+	      char-class5-hpgain
+	      char-class-total-bab
+	      char-class-total-skills
+	      char-class-total-fort
+	      char-class-total-ref
+	      char-class-total-will
+	      char-class-total-hps
+	      char-favored-class
+	      char-hp-current
+	      char-hp-temp
+	      char-hp-total
+	      char-acro-class-check
+	      char-acro-total
+	      char-acro-ranks
+	      char-acro-class-bonus
+	      char-acro-misc
+	      char-appr-class-check
+	      char-appr-total
+	      char-appr-ranks
+	      char-appr-class-bonus
+	      char-appr-misc
+	      char-bluf-class-check
+	      char-bluf-total
+	      char-bluf-ranks
+	      char-bluf-class-bonus
+	      char-bluf-misc
+	      char-clim-class-check
+	      char-clim-total
+	      char-clim-ranks
+	      char-clim-class-bonus
+	      char-clim-misc
+	      char-cft1-class-check
+	      char-cft1-total
+	      char-cft1-ranks
+	      char-cft1-class-bonus
+	      char-cft1-misc
+	      char-cft2-class-check
+	      char-cft2-total
+	      char-cft2-ranks
+	      char-cft2-class-bonus
+	      char-cft2-misc
+	      char-dipl-class-check
+	      char-dipl-total
+	      char-dipl-ranks
+	      char-dipl-class-bonus
+	      char-dipl-misc
+	      char-disa-class-check
+	      char-disa-total
+	      char-disa-ranks
+	      char-disa-class-bonus
+	      char-disa-misc
+	      char-disg-class-check
+	      char-disg-total
+	      char-disg-ranks
+	      char-disg-class-bonus
+	      char-disg-misc
+	      char-esca-class-check
+	      char-esca-total
+	      char-esca-ranks
+	      char-esca-class-bonus
+	      char-esca-misc
+	      char-flyy-class-check
+	      char-flyy-total
+	      char-flyy-ranks
+	      char-flyy-class-bonus
+	      char-flyy-misc
+	      char-hand-class-check
+	      char-hand-total
+	      char-hand-ranks
+	      char-hand-class-bonus
+	      char-hand-misc
+	      char-heal-class-check
+	      char-heal-total
+	      char-heal-ranks
+	      char-heal-class-bonus
+	      char-heal-misc
+	      char-inti-class-check
+	      char-inti-total
+	      char-inti-ranks
+	      char-inti-class-bonus
+	      char-inti-misc
+	      char-knw1-class-check
+	      char-knw1-total
+	      char-knw1-ranks
+	      char-knw1-class-bonus
+	      char-knw1-misc
+	      char-knw2-class-check
+	      char-knw2-total
+	      char-knw2-ranks
+	      char-knw2-class-bonus
+	      char-knw2-misc
+	      char-knw3-class-check
+	      char-knw3-total
+	      char-knw3-ranks
+	      char-knw3-class-bonus
+	      char-knw3-misc
+	      char-knw4-class-check
+	      char-knw4-total
+	      char-knw4-ranks
+	      char-knw4-class-bonus
+	      char-knw4-misc
+	      char-knw5-class-check
+	      char-knw5-total
+	      char-knw5-ranks
+	      char-knw5-class-bonus
+	      char-knw5-misc
+	      char-knw6-class-check
+	      char-knw6-total
+	      char-knw6-ranks
+	      char-knw6-class-bonus
+	      char-knw6-misc
+	      char-ling-class-check
+	      char-ling-total
+	      char-ling-ranks
+	      char-ling-class-bonus
+	      char-ling-misc
+	      char-perc-class-check
+	      char-perc-total
+	      char-perc-ranks
+	      char-perc-class-bonus
+	      char-perc-misc
+	      char-perf-class-check
+	      char-perf-total
+	      char-perf-ranks
+	      char-perf-class-bonus
+	      char-perf-misc
+	      char-prof-class-check
+	      char-prof-total
+	      char-prof-ranks
+	      char-prof-class-bonus
+	      char-prof-misc
+	      char-ride-class-check
+	      char-ride-total
+	      char-ride-ranks
+	      char-ride-class-bonus
+	      char-ride-misc
+	      char-sens-class-check
+	      char-sens-total
+	      char-sens-ranks
+	      char-sens-class-bonus
+	      char-sens-misc
+	      char-slei-class-check
+	      char-slei-total
+	      char-slei-ranks
+	      char-slei-class-bonus
+	      char-slei-misc
+	      char-spel-class-check
+	      char-spel-total
+	      char-spel-ranks
+	      char-spel-class-bonus
+	      char-spel-misc
+	      char-stea-class-check
+	      char-stea-total
+	      char-stea-ranks
+	      char-stea-class-bonus
+	      char-stea-misc
+	      char-surv-class-check
+	      char-surv-total
+	      char-surv-ranks
+	      char-surv-class-bonus
+	      char-surv-misc
+	      char-swim-class-check
+	      char-swim-total
+	      char-swim-ranks
+	      char-swim-class-bonus
+	      char-swim-misc
+	      char-usem-class-check
+	      char-usem-total
+	      char-usem-ranks
+	      char-usem-class-bonus
+	      char-usem-misc
+	      char-ext1-class-check
+	      char-ext1-total
+	      char-ext1-ranks
+	      char-ext1-class-bonus
+	      char-ext1-misc
+	      char-ext2-class-check
+	      char-ext2-total
+	      char-ext2-ranks
+	      char-ext2-class-bonus
+	      char-ext2-misc
+	      char-ext3-class-check
+	      char-ext3-total
+	      char-ext3-ranks
+	      char-ext3-class-bonus
+	      char-ext3-misc
+	      char-cft1-type
+	      char-cft2-type
+	      char-knw1-type
+	      char-knw2-type
+	      char-knw3-type
+	      char-knw4-type
+	      char-knw5-type
+	      char-knw6-type
+	      char-perf-type
+	      char-prof-type
+	      char-ext1-skill-name
+	      char-ext2-skill-name
+	      char-ext3-skill-name
+	      char-ext1-abil
+	      char-ext2-abil
+	      char-ext3-abil
+	      char-race
+	      char-gen-feats
+	      char-com-feats
+	      char-itm-feats
+	      char-mma-feats
+	      char-rac-feats
+	      )))
+     
+     ;; The following functions are used by this form for layout purposes.
+     ;;
+     (defun arch-tocol (target &optional fill)
+       "Produces a string to skip to column TARGET.
+     Prepends newline if needed.
+     The optional FILL should be a character, used to fill to the column."
+       (if (null fill)
+           (setq fill ? ))
+       (if (< target (current-column))
+           (concat "\n" (make-string target fill))
+         (make-string (- target (current-column)) fill)))
+     ;;
+     (defun arch-rj (target field &optional fill)
+       "Produces a string to skip to column TARGET\
+      minus the width of field FIELD.
+     Prepends newline if needed.
+     The optional FILL should be a character,
+     used to fill to the column."
+       (arch-tocol (- target (length (nth field forms-fields))) fill))
+     
+     ;; Record filters.
+     ;;
+     (defun new-record-filter (the-record)
+       "Form a new record with some defaults."
+       (aset the-record char-player (user-full-name))
+       (aset the-record char-created (current-time-string))
+       (aset the-record char-acro-class-check " ")
+       (aset the-record char-appr-class-check " ")
+       (aset the-record char-bluf-class-check " ")
+       (aset the-record char-clim-class-check " ")
+       (aset the-record char-cft1-class-check " ")
+       (aset the-record char-cft2-class-check " ")
+       (aset the-record char-dipl-class-check " ")
+       (aset the-record char-disa-class-check " ")
+       (aset the-record char-disg-class-check " ")
+       (aset the-record char-esca-class-check " ")
+       (aset the-record char-flyy-class-check " ")
+       (aset the-record char-hand-class-check " ")
+       (aset the-record char-heal-class-check " ")
+       (aset the-record char-inti-class-check " ")
+       (aset the-record char-knw1-class-check " ")
+       (aset the-record char-knw2-class-check " ")
+       (aset the-record char-knw3-class-check " ")
+       (aset the-record char-knw4-class-check " ")
+       (aset the-record char-knw5-class-check " ")
+       (aset the-record char-knw6-class-check " ")
+       (aset the-record char-ling-class-check " ")
+       (aset the-record char-perc-class-check " ")
+       (aset the-record char-perf-class-check " ")
+       (aset the-record char-prof-class-check " ")
+       (aset the-record char-ride-class-check " ")
+       (aset the-record char-sens-class-check " ")
+       (aset the-record char-slei-class-check " ")
+       (aset the-record char-spel-class-check " ")
+       (aset the-record char-stea-class-check " ")
+       (aset the-record char-surv-class-check " ")
+       (aset the-record char-swim-class-check " ")
+       (aset the-record char-usem-class-check " ")
+       (aset the-record char-ext1-class-check " ")
+       (aset the-record char-ext2-class-check " ")
+       (aset the-record char-ext3-class-check " ")
+       the-record)                           ; return it
+     (setq forms-new-record-filter 'new-record-filter)
+     
+     ;; The format list.
+     (setq forms-format-list
+          (list
+	   "====== Pathfinder Character Sheet v1.0 (cdr255) ======\n\n"
+	   " --- DETAIL BLOCK --- \n"
+	   " Name: " char-name " Player: " char-player " Created: " char-created "\n"
+	   " Bio. Sex: " char-sex " Gender Id: " char-gender " Campaign: " char-campaign "\n"
+	   " Height: " char-height " Weight: " char-weight " Sexual Preference: " char-sexual-orient "\n"
+	   " Hair: " char-hair " Eyes: " char-eyes " Skin: " char-skin " Nation: " char-nation "\n"
+	   " Religion: " char-religion " Alignment: " char-alignment " Alignment(Means): " char-age " Handedness: " char-handedness "\n\n"
+	   " Race (Racial Features): " char-race "\n"
+	   " Size: " char-size " Bonus/Penalty: " char-size-bonus "\n"
+	   " Character Level (Class: Level): " char-level "\n"
+	   " Languages: " char-lang "\n"
+	   " Personality: " char-personality "\n"
+	   " -------------------- \n\n"
+	   " ------------- ABILITY SCORES BLOCK ------------\\ \n"
+	   " Stat [ Ab | Md ] ( Base + Race + Grow + Misc ) | \n"
+	   " STR: [ " char-str " | " char-str-mod " ] ( (" char-str-base ") + (" char-str-race ") + (" char-str-enhance ") + (" char-str-misc ") ) |\n"
+	   " DEX: [ " char-dex " | " char-dex-mod " ] ( (" char-dex-base ") + (" char-dex-race ") + (" char-dex-enhance ") + (" char-dex-misc ") ) |\n"
+	   " CON: [ " char-con " | " char-con-mod " ] ( (" char-con-base ") + (" char-con-race ") + (" char-con-enhance ") + (" char-con-misc ") ) |\n"
+	   " INT: [ " char-int " | " char-int-mod " ] ( (" char-int-base ") + (" char-int-race ") + (" char-int-enhance ") + (" char-int-misc ") ) |\n"
+	   " WIS: [ " char-wis " | " char-wis-mod " ] ( (" char-wis-base ") + (" char-wis-race ") + (" char-wis-enhance ") + (" char-wis-misc ") ) |\n"
+	   " CHA: [ " char-cha " | " char-cha-mod " ] ( (" char-cha-base ") + (" char-cha-race ") + (" char-cha-enhance ") + (" char-cha-misc ") ) |\n"
+	   " -----------------------------------------------/\n"
+	   " ----------------- HP / Class Recorder ------------------\\ \n"
+	   "    Class Name           - BAB - SPs - F/R/W - HDs - HPs | \n"
+	   " 1: " char-class1-name " - " char-class1-bab " - " char-class1-skill " - " char-class1-fort "/" char-class1-ref "/" char-class1-will " - " char-class1-hd " - " char-class1-hpgain " |\n"
+	   " 2: " char-class2-name " - " char-class2-bab " - " char-class2-skill " - " char-class2-fort "/" char-class2-ref "/" char-class2-will " - " char-class2-hd " - " char-class2-hpgain " |\n"
+	   " 3: " char-class3-name " - " char-class3-bab " - " char-class3-skill " - " char-class3-fort "/" char-class3-ref "/" char-class3-will " - " char-class3-hd " - " char-class3-hpgain " |\n"
+	   " 4: " char-class4-name " - " char-class4-bab " - " char-class4-skill " - " char-class4-fort "/" char-class4-ref "/" char-class4-will " - " char-class4-hd " - " char-class4-hpgain " |\n"
+	   " 5: " char-class5-name " - " char-class5-bab " - " char-class5-skill " - " char-class5-fort "/" char-class5-ref "/" char-class5-will " - " char-class5-hd " - " char-class5-hpgain " |\n"
+	   " ----------------------- Totals -------------------------| \n"
+	   " FC: " char-favored-class "                    - " char-class-total-bab " - "char-class-total-skills" - "char-class-total-fort"/"char-class-total-ref"/"char-class-total-will" -     - " char-class-total-hps" | \n"
+	   " Current HP: " char-hp-current " | Temp HP: " char-hp-temp " | Total HP: " char-hp-total " |\n"
+	   " --------------------------------------------------------/ \n"
+	   " ------------------------ SKILLS  BLOCK ------------------------\\ \n"
+	   " [C] Skill Name       - Total ( Ranks + (Ab) + (Class) + (Etc)) |\n"
+	   " [" char-acro-class-check "] Acrobatics       - <" char-acro-total "> (  " char-acro-ranks "   + (" '(nth 29 forms-fields) ") + (  " char-acro-class-bonus " ) + (" char-acro-misc ")) |\n"
+	   " [" char-appr-class-check "] Appraise         - <" char-appr-total "> (  " char-appr-ranks "   + (" '(nth 41 forms-fields) ") + (  " char-appr-class-bonus " ) + (" char-appr-misc ")) |\n"
+	   " [" char-bluf-class-check "] Bluff            - <" char-bluf-total "> (  " char-bluf-ranks "   + (" '(nth 53 forms-fields) ") + (  " char-bluf-class-bonus " ) + (" char-bluf-misc ")) |\n"
+	   " [" char-clim-class-check "] Climb            - <" char-clim-total "> (  " char-clim-ranks "   + (" '(nth 23 forms-fields) ") + (  " char-clim-class-bonus " ) + (" char-clim-misc ")) |\n"
+	   " [" char-cft1-class-check "] Craft (" char-cft1-type ") - <" char-cft1-total "> (  " char-cft1-ranks "   + (" '(nth 41 forms-fields) ") + (  " char-cft1-class-bonus " ) + (" char-cft1-misc ")) |\n"
+	   " [" char-cft2-class-check "] Craft (" char-cft2-type ") - <" char-cft2-total "> (  " char-cft2-ranks "   + (" '(nth 41 forms-fields) ") + (  " char-cft2-class-bonus " ) + (" char-cft2-misc ")) |\n"
+	   " [" char-dipl-class-check "] Diplomacy        - <" char-dipl-total "> (  " char-dipl-ranks "   + (" '(nth 53 forms-fields) ") + (  " char-dipl-class-bonus " ) + (" char-dipl-misc ")) |\n"
+	   " [" char-disa-class-check "] Disable Device   - <" char-disa-total "> (  " char-disa-ranks "   + (" '(nth 29 forms-fields) ") + (  " char-disa-class-bonus " ) + (" char-disa-misc ")) |\n"
+	   " [" char-disg-class-check "] Disguise         - <" char-disg-total "> (  " char-disg-ranks "   + (" '(nth 53 forms-fields) ") + (  " char-disg-class-bonus " ) + (" char-disg-misc ")) |\n"
+	   " [" char-esca-class-check "] Escape Artist    - <" char-esca-total "> (  " char-esca-ranks "   + (" '(nth 29 forms-fields) ") + (  " char-esca-class-bonus " ) + (" char-esca-misc ")) |\n"
+	   " [" char-flyy-class-check "] Fly              - <" char-flyy-total "> (  " char-flyy-ranks "   + (" '(nth 29 forms-fields) ") + (  " char-flyy-class-bonus " ) + (" char-flyy-misc ")) |\n"
+	   " [" char-hand-class-check "] Handle Animal    - <" char-hand-total "> (  " char-hand-ranks "   + (" '(nth 53 forms-fields) ") + (  " char-hand-class-bonus " ) + (" char-hand-misc ")) |\n"
+	   " [" char-heal-class-check "] Heal             - <" char-heal-total "> (  " char-heal-ranks "   + (" '(nth 47 forms-fields) ") + (  " char-heal-class-bonus " ) + (" char-heal-misc ")) |\n"
+	   " [" char-inti-class-check "] Intimidate       - <" char-inti-total "> (  " char-inti-ranks "   + (" '(nth 53 forms-fields) ") + (  " char-inti-class-bonus " ) + (" char-inti-misc ")) |\n"
+	   " [" char-knw1-class-check "] Knowledge (" char-knw1-type ") - <" char-knw1-total "> (  " char-knw1-ranks "   + (" '(nth 41 forms-fields) ") + (  " char-knw1-class-bonus " ) + (" char-knw1-misc ")) |\n"
+	   " [" char-knw2-class-check "] Knowledge (" char-knw2-type ") - <" char-knw2-total "> (  " char-knw2-ranks "   + (" '(nth 41 forms-fields) ") + (  " char-knw2-class-bonus " ) + (" char-knw2-misc ")) |\n"
+	   " [" char-knw3-class-check "] Knowledge (" char-knw3-type ") - <" char-knw3-total "> (  " char-knw3-ranks "   + (" '(nth 41 forms-fields) ") + (  " char-knw3-class-bonus " ) + (" char-knw3-misc ")) |\n"
+	   " [" char-knw4-class-check "] Knowledge (" char-knw4-type ") - <" char-knw4-total "> (  " char-knw4-ranks "   + (" '(nth 41 forms-fields) ") + (  " char-knw4-class-bonus " ) + (" char-knw4-misc ")) |\n"
+	   " [" char-knw5-class-check "] Knowledge (" char-knw5-type ") - <" char-knw5-total "> (  " char-knw5-ranks "   + (" '(nth 41 forms-fields) ") + (  " char-knw5-class-bonus " ) + (" char-knw5-misc ")) |\n"
+	   " [" char-knw6-class-check "] Knowledge (" char-knw6-type ") - <" char-knw6-total "> (  " char-knw6-ranks "   + (" '(nth 41 forms-fields) ") + (  " char-knw6-class-bonus " ) + (" char-knw6-misc ")) |\n"
+	   " [" char-ling-class-check "] Linguistics      - <" char-ling-total "> (  " char-ling-ranks "   + (" '(nth 41 forms-fields) ") + (  " char-ling-class-bonus " ) + (" char-ling-misc ")) |\n"
+	   " [" char-perc-class-check "] Perception       - <" char-perc-total "> (  " char-perc-ranks "   + (" '(nth 47 forms-fields) ") + (  " char-perc-class-bonus " ) + (" char-perc-misc ")) |\n"
+	   " [" char-perf-class-check "] Perform (" char-perf-type ") - <" char-perf-total "> (  " char-perf-ranks "   + (" '(nth 53 forms-fields) ") + (  " char-perf-class-bonus " ) + (" char-perf-misc ")) |\n"
+	   " [" char-prof-class-check "] Prof. (" char-prof-type ") - <" char-prof-total "> (  " char-prof-ranks "   + (" '(nth 47 forms-fields) ") + (  " char-prof-class-bonus " ) + (" char-prof-misc ")) |\n"
+	   " [" char-ride-class-check "] Ride             - <" char-ride-total "> (  " char-ride-ranks "   + (" '(nth 29 forms-fields) ") + (  " char-ride-class-bonus " ) + (" char-ride-misc ")) |\n"
+	   " [" char-sens-class-check "] Sense Motive     - <" char-sens-total "> (  " char-sens-ranks "   + (" '(nth 47 forms-fields) ") + (  " char-sens-class-bonus " ) + (" char-sens-misc ")) |\n"
+	   " [" char-slei-class-check "] Sleight of Hand  - <" char-slei-total "> (  " char-slei-ranks "   + (" '(nth 29 forms-fields) ") + (  " char-slei-class-bonus " ) + (" char-slei-misc ")) |\n"
+	   " [" char-spel-class-check "] Spellcraft       - <" char-spel-total "> (  " char-spel-ranks "   + (" '(nth 41 forms-fields) ") + (  " char-spel-class-bonus " ) + (" char-spel-misc ")) |\n"
+	   " [" char-stea-class-check "] Stealth          - <" char-stea-total "> (  " char-stea-ranks "   + (" '(nth 29 forms-fields) ") + (  " char-stea-class-bonus " ) + (" char-stea-misc ")) |\n"
+	   " [" char-surv-class-check "] Survival         - <" char-surv-total "> (  " char-surv-ranks "   + (" '(nth 47 forms-fields) ") + (  " char-surv-class-bonus " ) + (" char-surv-misc ")) |\n"
+	   " [" char-swim-class-check "] Swim             - <" char-swim-total "> (  " char-swim-ranks "   + (" '(nth 23 forms-fields) ") + (  " char-swim-class-bonus " ) + (" char-swim-misc ")) |\n"
+	   " [" char-usem-class-check "] Use Magic Device - <" char-usem-total "> (  " char-usem-ranks "   + (" '(nth 53 forms-fields) ") + (  " char-usem-class-bonus " ) + (" char-usem-misc ")) |\n"
+	   " [" char-ext1-class-check "] " char-ext1-skill-name " - <" char-ext1-total "> (  " char-ext1-ranks "   + (" char-ext1-abil ") + (  " char-ext1-class-bonus " ) + (" char-ext1-misc ")) |\n"
+	   " [" char-ext2-class-check "] " char-ext2-skill-name " - <" char-ext2-total "> (  " char-ext2-ranks "   + (" char-ext2-abil ") + (  " char-ext2-class-bonus " ) + (" char-ext2-misc ")) |\n"
+	   " [" char-ext3-class-check "] " char-ext3-skill-name " - <" char-ext3-total "> (  " char-ext3-ranks "   + (" char-ext3-abil ") + (  " char-ext3-class-bonus " ) + (" char-ext3-misc ")) |\n"
+   	   " ---------------------------------------------------------------/ \n"
+	   " -------------------- FEATS & TRAITS BLOCK ---------------------\\ \n"
+	   " Format: Feat Name - Short Description (Source) | Feat... \n\n"
+	   " GENERAL FEATS:\n " char-gen-feats "\n\n"
+	   " COMBAT FEATS:\n " char-com-feats "\n\n"
+	   " ITEM CREATION FEATS:\n " char-itm-feats "\n\n"
+	   " METAMAGIC FEATS:\n " char-mma-feats "\n\n"
+	   " RACIAL FEATS:\n " char-rac-feats "\n\n"
+	   " ------------------\n\n"
+	   " Format: Trait Name - Short Description (Source) | Trait... \n\n"
+	   " BASIC TRAITS:\n " char-bas-traits "\n\n"
+	   " CAMPAIGN TRAITS: \n " char-cam-traits "\n\n"
+	   " RACIAL TRAITS: \n " char-rac-traits "\n\n"
+	   " REGIONAL TRAITS: \n " char-reg-traits "\n\n"
+	   " RELIGIOUS TRAITS: \n " char-rel-traits "\n\n"
+	   " ---------------------------------------------------------------/ \n"
+	   " ------------------ ITEMS & EQUIPMENT BLOCK --------------------\\ \n"
+	   " EQUIPPED ARMOR\n"
+	   " ==============\n"
+	   " Type:   Item Name             - Enh AC Dex Pen Spl Type Size Material\n"
+	   " Armor:  " char-armor-name " - "char-armor-enh" " char-armor-dex " " char-armor-pen " " char-armor-spl " " char-armor-type " " char-armor-size " " char-armor-mat "\n"
+	   " Shield: " char-shield-name " - "char-shield-enh" " char-shield-dex " " char-shield-pen " " char-shield-spl " " char-shield-type " " char-shield-size " " char-shield-mat "\n\n"
+	   " WORN EQUIPMENT\n"
+	   " ==============\n"
+	   " Head:      " char-equip-head "\n"
+	   " Face:      " char-equip-face "\n"
+	   " Throat:    " char-equip-thro "\n"
+	   " Shoulders: " char-equip-shou "\n"
+	   " Body:      " char-equip-body "\n"
+	   " Torso:     " char-equip-tors "\n"
+	   " Arms:      " char-equip-arms "\n"
+	   " Hands:     " char-equip-hand "\n"
+	   " Ring(L):   " char-equip-rin1 "\n"
+	   " Ring(R):   " char-equip-rin2 "\n"
+	   " Waist:     " char-equip-wais "\n"
+	   " Feet:      " char-equip-feet "\n\n"
+	   " CONTAINERS & LOADS\n"
+	   " ==========\n"
+	   " Format: # Container Name (Volume) [Weight] | # Container...\n"
+	   " " char-containers "\n\n"
+	   " Current Load Type: " char-load-curr " Max Dex: " char-load-dext " Check Penalty: " char-load-chec " Speed: " char-load-spee "Run: " char-load-runn " \n"
+	   " Light Load: " char-load-ligh " | Medium Load: " char-load-medi " | Heavy Load: " char-load-heav " | Max Load: " char-load-maxi" \n"
+	   " Above Head: " char-load-head " | Off Ground: " char-load-lift " | Push & Drag: " char-load-drag " \n\n"
+	   " ITEMS\n"
+	   " =====\n"
+	   " Format: Item x# (Weight) <container> Optional Magic Item Description - Item...\n Mundane:\n " char-mundane-items "\n\n"
+	   " Magic:\n " char-magic-items "\n\n"
+	   " WEALTH\n"
+	   " ======\n"
+	   " Platinum: " char-wealth-pp " Gold: " char-wealth-gp " Silver: " char-wealth-sp " Copper: " char-wealth-cp "\n Other: " char-other-wealth "\n\n"
+	   " ---------------------------------------------------------------/ \n"
+	   " ------------------ SPELLS & ABILITIES BLOCK -------------------\\ \n"
+	   " SPELL DCS\n"
+	   " =========\n"
+	   " Modifiers: INT[" '(nth 41 forms-fields) "] WIS[" '(nth 47 forms-fields) "] CHA[" '(nth 53 forms-fields) "]\n"
+	   " Level 0 - " char-spells-0dc " (10 + 0 + (" char-spells-modifier ") + (" char-spells-misc "))\n"
+	   " Level 1 - " char-spells-1dc " (10 + 1 + (" '(nth 47 forms-fields) ") + (" '(nth 47 forms-fields) "))\n"
+	   " Level 2 - " char-spells-2dc " (10 + 2 + (" '(nth 47 forms-fields) ") + (" '(nth 47 forms-fields) "))\n"
+	   " Level 3 - " char-spells-3dc " (10 + 3 + (" '(nth 47 forms-fields) ") + (" '(nth 47 forms-fields) "))\n"
+	   " Level 4 - " char-spells-4dc " (10 + 4 + (" '(nth 47 forms-fields) ") + (" '(nth 47 forms-fields) "))\n"
+	   " Level 5 - " char-spells-5dc " (10 + 5 + (" '(nth 47 forms-fields) ") + (" '(nth 47 forms-fields) "))\n"
+	   " Level 6 - " char-spells-6dc " (10 + 6 + (" '(nth 47 forms-fields) ") + (" '(nth 47 forms-fields) "))\n"
+	   " Level 7 - " char-spells-7dc " (10 + 7 + (" '(nth 47 forms-fields) ") + (" '(nth 47 forms-fields) "))\n"
+	   " Level 8 - " char-spells-8dc " (10 + 8 + (" '(nth 47 forms-fields) ") + (" '(nth 47 forms-fields) "))\n"
+	   " Level 9 - " char-spells-9dc " (10 + 9 + (" '(nth 47 forms-fields) ") + (" '(nth 47 forms-fields) "))\n"
+	   " !!!EXTRAORDINARY/SPELL-LIKE ABILITIES ADD 1/2 LEVEL TO SPELL DC!!!\n\n"
+	   " LISTS\n"
+	   " =====\n"
+	   " Prepared Spells:\n Format: Spell Name (DC), Spell Name...\n " char-spells-prep "\n\n"
+	   " Level 0 Spells:\n Format: Spell Name (DC) <Range> [Duration] {Source}, Spell Name...\n " char-spells-0 "\n"
+	   " Level 1 Spells:\n " char-spells-1 "\n"
+	   " Level 2 Spells:\n " char-spells-2 "\n"
+	   " Level 3 Spells:\n " char-spells-3 "\n"
+	   " Level 4 Spells:\n " char-spells-4 "\n"
+	   " Level 5 Spells:\n " char-spells-5 "\n"
+	   " Level 6 Spells:\n " char-spells-6 "\n"
+	   " Level 7 Spells:\n " char-spells-7 "\n"
+	   " Level 8 Spells:\n " char-spells-8 "\n"
+	   " Level 9 Spells:\n " char-spells-9 "\n"
+	   " Other Spells:\n Format: Level - Spell Name (DC) <Range> [Duration] {Source}, Spell Name...\n " char-spells-etc "\n"
+	   " Special Abilities:\n " char-spabil-list "\n"
+	   " ---------------------------------------------------------------/ \n"
+	   " ------------------------ COMBAT  BLOCK ------------------------\ \n"
+	   " COMBAT STATS:\n"
+	   " =============    Tot (arm + shl + dex + size + ddg + nat + msc)\n"
+	   " Armor Class:     " char-ac " ((" '(nth 47 forms-fields) ") + (" '(nth 47 forms-fields) ") + (" '(nth 29 forms-fields) ") + (" '(nth 47 forms-fields) ") + (" char-dodge-bonus ") + (" char-natural-armor ") + (" char-ac-misc "))\n"
+	   " Touch Arm Class: " char-to " ((---) + (---) + ("'(nth 29 forms-fields)") + (" '(nth 47 forms-fields) ") + (" '(nth 47 forms-fields) ") + (---) + (" '(nth 47 forms-fields)"))\n"
+	   " Flat-Foot Class: " char-ff " ((" '(nth 47 forms-fields) ") + (" '(nth 47 forms-fields) ") + (---) + (" '(nth 47 forms-fields) ") + (---) + (" '(nth 47 forms-fields)") + (" '(nth 47 forms-fields) "))\n"
+	   " ---\n"
+	   " Save Name: Tot (bas + mod + enh + msc)\n"
+	   " ---\n"
+	   " Fortitude: " char-fort-total " ((" '(nth 47 forms-fields) ") + ("'(nth 35 forms-fields)") + (" char-fort-enh ") + (" char-fort-msc "))\n"
+	   " Reflex:    " char-refl-total " ((" '(nth 47 forms-fields) ") + ("'(nth 29 forms-fields)") + (" char-refl-enh ") + (" char-refl-msc "))\n"
+	   " Will:      " char-will-total " ((" '(nth 47 forms-fields) ") + ("'(nth 47 forms-fields)") + (" char-will-enh ") + (" char-will-msc "))\n"
+	   " ---\n"
+	   " Attack Name: Tot (bas + mod + siz + msc)\n"
+	   " ---\n"
+	   " Melee Attack: " char-melee-total " ((" '(nth 47 forms-fields) ") + (" '(nth 23 forms-fields) ") + (---) + (" char-melee-msc "))\n"
+	   " Melee Attack: " char-range-total " ((" '(nth 47 forms-fields) ") + (" '(nth 29 forms-fields) ") + (---) + (" char-range-msc "))\n"
+	   " Melee Attack: " char-combm-total " ((" '(nth 47 forms-fields) ") + (" '(nth 23 forms-fields) ") + ("char-combm-size") + (" char-combm-msc "))\n"
+	   " Melee Attack: " char-combd-total " (10 + (" '(nth 47 forms-fields) ") + (" '(nth 23 forms-fields) ") + (" '(nth 29 forms-fields)") + ("char-combd-size") + (" char-combd-msc "))\n"
+	   
+	   
+	   
+	   
+	   
+
+          ))

@@ -1,0 +1,491 @@
+;; true20-chars.form - True20 Character Sheet, v1.0 -*- forms -*-
+     
+     ;; This provides a form based Character Sheet for True20.
+     ;; Downloaded from cdr255.com.
+     
+     ;; Set the name of the data file.
+     (setq forms-file "chars-true20.dat")
+     
+     ;; Use forms-enumerate to set field names and number thereof.
+     (setq forms-number-of-fields
+           (forms-enumerate
+            '(char-name                       
+	      char-player                     
+	      char-created
+	      char-campaign
+	      ; 5
+	      char-roles                      
+	      char-sex                        
+	      char-gender                     
+	      char-sexual-orient              
+	      char-height
+	      ; 10
+	      char-weight
+	      char-hair
+	      char-eyes
+	      char-skin                       
+	      char-handedness
+	      ; 15
+	      char-nation
+	      char-religion
+	      char-virtue
+	      char-vice                       
+	      char-personality
+	      ; 20
+	      char-background
+	      char-str
+	      char-dex
+	      char-con                        
+	      char-int
+	      ; 25
+	      char-wis
+	      char-cha
+	      char-size
+	      char-size-mod
+       	      char-speed 
+	      ; 30                     
+	      char-wealth
+	      char-rep
+	      char-conviction
+	      char-init
+	      char-init-misc
+	      ; 35                  
+	      char-bab
+	      char-melee
+	      char-melee-misc                 
+	      char-ranged
+	      char-ranged-misc
+	      ; 40
+	      char-grapple     
+	      char-grapple-misc
+	      char-dodge
+	      char-dodge-misc
+	      char-parry
+	      ; 45
+	      char-parry-misc
+	      char-tough
+	      char-tough-misc
+	      char-fort
+	      char-fort-base
+	      ; 50
+	      char-fort-misc
+	      char-ref
+	      char-ref-base
+	      char-ref-misc
+	      char-wil
+	      ; 55
+	      char-wil-base
+	      char-wil-misc
+	      char-nonlethal-1
+	      char-nonlethal-2
+	      char-nonlethal-3
+	      ; 60
+	      char-nonlethal-4
+	      char-lethal-1
+	      char-lethal-2
+	      char-lethal-3
+	      char-lethal-4
+	      ; 65
+	      char-lethal-5
+	      char-fatigue-1
+	      char-fatigue-2
+	      char-fatigue-3
+	      char-weapon-1
+	      ; 70
+	      char-weapon-1-atk
+	      char-weapon-1-dam
+	      char-weapon-1-cri
+	      char-weapon-1-ran
+	      char-weapon-1-not
+	      ; 75
+	      char-weapon-2
+	      char-weapon-2-atk
+	      char-weapon-2-dam
+	      char-weapon-2-cri
+	      char-weapon-2-ran
+	      ; 80
+	      char-weapon-2-not
+	      char-weapon-3
+	      char-weapon-3-atk
+	      char-weapon-3-dam
+	      char-weapon-3-cri
+	      ; 85
+	      char-weapon-3-ran
+	      char-weapon-3-not
+	      char-weapon-4
+	      char-weapon-4-atk
+	      char-weapon-4-dam
+	      ; 90
+	      char-weapon-4-cri
+	      char-weapon-4-ran
+	      char-weapon-4-not
+	      char-weapon-5
+	      char-weapon-5-atk
+	      ; 95
+	      char-weapon-5-dam
+	      char-weapon-5-cri
+	      char-weapon-5-ran
+	      char-weapon-5-not
+	      char-equipment
+	      ; 100
+	      char-load
+	      char-tot-load
+	      char-possessions
+	      char-move-acc
+	      char-move-all-out
+	      ; 105
+	      char-languages
+	      char-skill-acro
+	      char-skill-acro-ranks
+	      char-skill-acro-misc
+	      char-skill-bluf
+	      ; 110
+	      char-skill-bluf-ranks
+	      char-skill-bluf-misc
+	      char-skill-clim
+	      char-skill-clim-ranks
+	      char-skill-clim-misc
+	      ; 115
+	      char-skill-conc
+	      char-skill-conc-ranks
+	      char-skill-conc-misc
+	      char-skill-craf-name
+	      char-skill-craf
+	      ; 120
+	      char-skill-craf-ranks
+	      char-skill-craf-misc
+	      char-skill-dipl
+	      char-skill-dipl-ranks
+	      char-skill-dipl-misc
+	      ; 125
+	      char-skill-disa
+	      char-skill-disa-ranks
+	      char-skill-disa-misc
+	      char-skill-disg
+	      char-skill-disg-ranks
+	      ; 130
+	      char-skill-disg-misc
+	      char-skill-esca
+	      char-skill-esca-ranks
+	      char-skill-esca-misc
+	      char-skill-gath
+	      ; 135
+	      char-skill-gath-ranks
+	      char-skill-gath-misc
+	      char-skill-hand
+	      char-skill-hand-ranks
+	      char-skill-hand-misc
+	      ; 140
+	      char-skill-heal
+	      char-skill-heal-ranks
+	      char-skill-heal-misc
+	      char-skill-inti
+	      char-skill-inti-ranks
+	      ; 145
+	      char-skill-inti-misc
+	      char-skill-jump
+	      char-skill-jump-ranks
+	      char-skill-jump-misc
+	      char-skill-know1-name
+	      ; 150
+	      char-skill-know1
+	      char-skill-know1-ranks
+	      char-skill-know1-misc
+	      char-skill-know2-name
+	      char-skill-know2
+	      ; 155
+	      char-skill-know2-ranks
+	      char-skill-know2-misc
+	      char-skill-know3-name
+	      char-skill-know3
+	      char-skill-know3-ranks
+	      ; 160
+	      char-skill-know3-misc
+	      char-skill-know4-name
+	      char-skill-know4
+	      char-skill-know4-ranks
+	      char-skill-know4-misc
+	      ; 165
+	      char-skill-noti
+	      char-skill-noti-ranks
+	      char-skill-noti-misc
+	      char-skill-perf-name
+	      char-skill-perf
+	      ; 170
+	      char-skill-perf-ranks
+	      char-skill-perf-misc
+	      char-skill-ride
+	      char-skill-ride-ranks
+	      char-skill-ride-misc
+	      ; 175
+	      char-skill-sear
+	      char-skill-sear-ranks
+	      char-skill-sear-misc
+	      char-skill-sens
+	      char-skill-sens-ranks
+	      ; 180
+	      char-skill-sens-misc
+	      char-skill-slei
+	      char-skill-slei-ranks
+	      char-skill-slei-misc
+	      char-skill-stea
+	      ; 185
+	      char-skill-stea-ranks
+	      char-skill-stea-misc
+	      char-skill-surv
+	      char-skill-surv-ranks
+	      char-skill-surv-misc
+	      ; 190
+	      char-skill-swim
+	      char-skill-swim-ranks
+	      char-skill-swim-misc
+	      char-skill-extr1-name
+	      char-skill-extr1
+	      ; 195
+	      char-skill-extr1-ranks
+	      char-skill-extr1-misc
+	      char-skill-extr2-name
+	      char-skill-extr2
+	      char-skill-extr2-ranks
+	      ; 200
+	      char-skill-extr2-misc
+	      char-skill-extr3-name
+	      char-skill-extr3
+	      char-skill-extr3-ranks
+	      char-skill-extr3-misc
+	      ; 205
+	      char-skill-extr4-name
+	      char-skill-extr4
+	      char-skill-extr4-ranks
+	      char-skill-extr4-misc
+	      char-skill-extr5-name
+	      ; 210
+	      char-skill-extr5
+	      char-skill-extr5-ranks
+	      char-skill-extr5-misc
+	      char-skill-extr6-name
+	      char-skill-extr6
+	      ; 215
+	      char-skill-extr6-ranks
+	      char-skill-extr6-misc
+	      char-feats
+	      char-abilities
+	      char-notes
+	      ; 220
+	      char-powers
+	      char-power-bonus
+	      char-power-rank
+	      char-power-misc
+	      char-power-save
+	      ; 225
+	      char-power-level
+	      char-power-save-misc
+	      char-grapple-size
+	      char-armor
+	      char-armor-bonus
+	      ; 230
+	      char-armor-traits
+	      char-shield
+	      char-shield-bonus
+	      char-shield-traits
+	      char-tough-bonus
+	      ; 235
+	      char-skill-extr1-stat
+	      char-skill-extr1-stat-name
+	      char-skill-extr2-stat
+	      char-skill-extr2-stat-name
+	      char-skill-extr3-stat
+	      ;240
+	      char-skill-extr3-stat-name
+	      char-skill-extr4-stat
+	      char-skill-extr4-stat-name
+	      char-skill-extr5-stat
+	      char-skill-extr5-stat-name
+	      ;245
+	      char-skill-extr6-stat
+	      char-skill-extr6-stat-name
+	      char-arm-che-pen
+	      char-arm-mod
+	      char-shield-training
+	      ;250
+	      char-light-load
+	      char-med-load
+	      char-heavy-load
+	      char-max-load
+	      char-tot-weight
+	      ;255
+	      char-power-ability
+	      char-power-ability-mod
+	      char-profession-skill
+	      char-weapon-1-rng
+	      char-weapon-2-rng
+	      ;260
+	      char-weapon-3-rng
+	      char-weapon-4-rng
+	      char-weapon-5-rng
+	      char-skill-points
+	      char-hero-track
+	      ;266
+	      char-push-load
+	      )))
+     
+     ;; The following functions are used by this form for layout purposes.
+     ;;
+     (defun arch-tocol (target &optional fill)
+       "Produces a string to skip to column TARGET.
+     Prepends newline if needed.
+     The optional FILL should be a character, used to fill to the column."
+       (if (null fill)
+           (setq fill ? ))
+       (if (< target (current-column))
+           (concat "\n" (make-string target fill))
+         (make-string (- target (current-column)) fill)))
+     ;;
+     (defun arch-rj (target field &optional fill)
+       "Produces a string to skip to column TARGET\
+      minus the width of field FIELD.
+     Prepends newline if needed.
+     The optional FILL should be a character,
+     used to fill to the column."
+       (arch-tocol (- target (length (nth field forms-fields))) fill))
+     
+     ;; Record filters.
+     ;;
+     (defun new-record-filter (the-record)
+       "Form a new record with some defaults."
+       (aset the-record char-player (user-full-name))
+       (aset the-record char-created (current-time-string))
+       the-record)                           ; return it
+     (setq forms-new-record-filter 'new-record-filter)
+     
+     ;; The format list.
+     (setq forms-format-list
+          (list
+	   "====== True20 Character Sheet v1.0 (cdr255) ======\n\n"
+	   " --- DETAIL BLOCK --- \n"
+	   " Name: " char-name " Player: " char-player " Created: " char-created "\n"
+	   " Bio. Sex: " char-sex " Gender Id: " char-gender " Campaign: " char-campaign "\n"
+	   " Height: " char-height " Weight: " char-weight " Sexual Preference: " char-sexual-orient "\n"
+	   " Hair: " char-hair " Eyes: " char-eyes " Skin: " char-skin " Nation: " char-nation "\n"
+	   " Religion: " char-religion " Virtue: " char-virtue " Vice: " char-vice " Handedness: " char-handedness "\n\n"
+	   " Backgrounds: " char-background "\n"
+	   " Roles (Level): " char-roles "\n"
+	   " Personality: " char-personality "\n"
+	   " -------------------- \n\n"
+	   " --- STATS  BLOCK --- \n"
+	   " ========+    ------------- [ Initiative = Dex + Misc. ] ------------- \n"
+	   " Str: " char-str " |    Initiative: " char-init " [ (" '(nth 22 forms-fields) ") + (" char-init-misc ") ]  |  Base Combat Bonus: " char-bab " \n"
+	   " Dex: " char-dex " |    \n"
+	   " Con: " char-con " |    ---- [ Attack Bonus = BCB + Ability + Size + Misc ] ---- \n" 
+	   " Int: " char-int " |    Melee Bonus:   " char-melee   " [ (" '(nth 35 forms-fields) ") + (" '(nth 22 forms-fields) ") + (" '(nth 28 forms-fields)  ") + (" char-melee-misc   ") ]\n"
+	   " Wis: " char-wis " |    Ranged Bonus:  " char-ranged  " [ (" '(nth 35 forms-fields) ") + (" '(nth 22 forms-fields) ") + (" '(nth 28 forms-fields) ") + (" char-ranged-misc  ") ]\n"
+	   " Cha: " char-cha " |    Grapple Bonus: " char-grapple " [ (" '(nth 35 forms-fields) ") + (" '(nth 21 forms-fields) ") + (" char-grapple-size ") + (" char-grapple-misc ") ]\n"
+	   " --------+\n"
+	   " Size:        --- [ Def Bonus = 10 + BCB + Ability + Size + Misc ] ---  \n"
+	   " " char-size " - (" char-size-mod ")   Dodge: " char-dodge " [ 10 + (" '(nth 35 forms-fields) ") + (" '(nth 22 forms-fields) ") + (" '(nth 28 forms-fields) ") + (" char-dodge-misc ") ]\n"
+	   " Speed: " char-speed     "'   Parry: " char-parry " [ 10 + (" '(nth 35 forms-fields) ") + (" '(nth 21 forms-fields) ") + (" '(nth 28 forms-fields) ") + (" char-parry-misc ") ]\n"
+	   " Wealth: " char-wealth   "\n"
+	   " Rep:    " char-rep"    ------- [ Save = Base (Armor) + Ability + Misc ] -------  \n"
+           " Conviction:  Toughness: " char-tough " [ (" '(nth 234 forms-fields) ") + (" '(nth 23 forms-fields) ") + (" char-tough-misc ") ]\n"
+	   "  [" char-conviction "]     Fortitude: " char-fort  " [ (" char-fort-base   ") + (" '(nth 23 forms-fields) ") + (" char-fort-misc  ") ]\n"
+	   "              Reflex:    " char-ref   " [ (" char-ref-base    ") + (" '(nth 22 forms-fields) ") + (" char-ref-misc   ") ]\n"
+	   "              Will:      " char-wil   " [ (" char-wil-base    ") + (" '(nth 25 forms-fields) ") + (" char-wil-misc   ") ]\n"
+	   " -------------------- \n\n"
+	   " --- COMBAT BLOCK --- \n"
+	   " ======= Damage Store ======= \n"
+	   " Non ( Bruised: [" char-nonlethal-1 "] Dazed: [" char-nonlethal-2 "]   Staggered: [" char-nonlethal-3 "] Unconscious: [" char-nonlethal-4 "] )\n"
+	   " Let ( Hurt: [" char-lethal-1 "] Wounded: [" char-lethal-2 "] Disabled: [" char-lethal-3 "] Dying: [" char-lethal-4 "] Dead: [" char-lethal-5 "] )\n"
+           " Fat ( Winded: [" char-fatigue-1 "]          Fatigued:  [" char-fatigue-2 "]          Exhausted: [" char-fatigue-3 "] )\n"
+	   " ============================ \n"
+	   " Armor:  " char-armor  " Stats: " char-armor-bonus  " Traits: " char-armor-traits  "\n"
+	   " Shield: " char-shield " Stats: " char-shield-bonus " Traits: " char-shield-traits "\n" 
+	   " Total Armor Bonus: " char-tough-bonus " [ (" '(nth 229 forms-fields) ") + (" '(nth 232 forms-fields) ") ]\n"
+	   " ============================ \n"
+	   " Attack 1: " char-weapon-1 "\n"
+	   " To Hit: " char-weapon-1-atk " Dam: " char-weapon-1-dam " Crit: " char-weapon-1-cri " Range: " char-weapon-1-rng "\n"
+	   " Notes: " char-weapon-1-not "\n"
+	   " Attack 2: " char-weapon-2 "\n"
+	   " To Hit: " char-weapon-2-atk " Dam: " char-weapon-2-dam " Crit: " char-weapon-2-cri " Range: " char-weapon-2-rng "\n"
+	   " Notes: " char-weapon-2-not "\n"
+	   " Attack 3: " char-weapon-3 "\n"
+	   " To Hit: " char-weapon-3-atk " Dam: " char-weapon-3-dam " Crit: " char-weapon-3-cri " Range: " char-weapon-3-rng "\n"
+	   " Notes: " char-weapon-3-not "\n"
+	   " Attack 4: " char-weapon-4 "\n"
+	   " To Hit: " char-weapon-4-atk " Dam: " char-weapon-4-dam " Crit: " char-weapon-4-cri " Range: " char-weapon-4-rng "\n"
+	   " Notes: " char-weapon-4-not "\n"
+	   " Attack 5: " char-weapon-5 "\n"
+	   " To Hit: " char-weapon-5-atk " Dam: " char-weapon-5-dam " Crit: " char-weapon-5-cri " Range: " char-weapon-5-rng "\n"
+	   " Notes: " char-weapon-5-not "\n"
+	   "\n\n\n\n\n\n\n\n\n\n"
+	   " -------------------- \n\n"
+	   " -- FEATURES BLOCK -- \n\n"
+	   " ========== Skills ========== \n"              
+	   " Armor Check Penalty: " char-arm-che-pen " [ -1 * ( (" '(nth 229 forms-fields)  ") + (" '(nth 232 forms-fields) ") - (" char-arm-mod ") - (" char-shield-training ") ) ]\n"
+	   " [ -1 * ( Armor Bonus + Shield Bonus - Armor Mods - Shield Training) ]\n\n"
+	   " Skill Name: Score [ Ranks + Misc + Ability (Name) ] \n"
+	   " ^ = Cannot be used untrained. \n"
+	   " * = Armor Check Penalty Applies (2x on Swim).\n"
+	   " Total Skill Points Spent: " char-skill-points ". \n"
+           "                              \n"
+	   " " char-skill-acro " - Acrobatics^* [ (" char-skill-acro-ranks ") + (" char-skill-acro-misc ") + (" '(nth 22 forms-fields) ") + (" '(nth 247 forms-fields)  ") <Dex> ]\n"
+	   " " char-skill-bluf " - Bluff [ (" char-skill-bluf-ranks ") + (" char-skill-bluf-misc ") + (" '(nth 26 forms-fields) ") <Cha> ]""\n"
+	   " " char-skill-clim " - Climb* [ (" char-skill-clim-ranks ") + (" char-skill-clim-misc ") + (" '(nth 21 forms-fields) ") + (" '(nth 247 forms-fields)  ") <Str> ]""\n"
+	   " " char-skill-conc " - Concentration [ (" char-skill-conc-ranks ") + (" char-skill-conc-misc ") + (" '(nth 25 forms-fields) ") <Wis> ]""\n"
+	   " " char-skill-craf " - Craft(" char-skill-craf-name ")^ [ (" char-skill-craf-ranks ") + (" char-skill-craf-misc ") + (" '(nth 24 forms-fields) ") <Int> ]" "\n"
+	   " " char-skill-dipl " - Diplomacy [ (" char-skill-dipl-ranks ") + (" char-skill-dipl-misc ") + (" '(nth 26 forms-fields) ") <Cha> ]""\n"
+	   " " char-skill-disa " - Disable Device^ [ (" char-skill-disa-ranks ") + (" char-skill-disa-misc ") + (" '(nth 24 forms-fields) ") <Int> ]""\n"
+	   " " char-skill-disg " - Disguise [ (" char-skill-disg-ranks ") + (" char-skill-disg-misc ") + (" '(nth 26 forms-fields) ") <Cha> ]""\n"
+	   " " char-skill-esca " - Escape Artist* [ (" char-skill-esca-ranks ") + (" char-skill-esca-misc ") + (" '(nth 22 forms-fields) ") + (" '(nth 247 forms-fields)  ") <Dex> ]""\n"
+	   " " char-skill-gath " - Gather Information [ (" char-skill-gath-ranks ") + (" char-skill-gath-misc ") + (" '(nth 26 forms-fields) ") <Cha> ]""\n"
+	   " " char-skill-hand " - Handle Animal [ (" char-skill-hand-ranks ") + (" char-skill-hand-misc ") + (" '(nth 26 forms-fields) ") <Cha> ]""\n"
+	   " " char-skill-heal " - Heal^ [ (" char-skill-heal-ranks ") + (" char-skill-heal-misc ") + (" '(nth 25 forms-fields) ") <Wis> ]""\n"
+	   " " char-skill-inti " - Intimidate [ (" char-skill-inti-ranks ") + (" char-skill-inti-misc ") + (" '(nth 26 forms-fields) ") <Cha> ]""\n"
+	   " " char-skill-jump " - Jump* [ (" char-skill-jump-ranks ") + (" char-skill-jump-misc ") + (" '(nth 21 forms-fields) ") + (" '(nth 247 forms-fields)  ") <Str> ]""\n"
+	   " " char-skill-know1 " - Knowledge(" char-skill-know1-name ")^ [ (" char-skill-know1-ranks ") + (" char-skill-know1-misc ") + (" '(nth 24 forms-fields) ") <Int> ]""\n"
+	   " " char-skill-know2 " - Knowledge(" char-skill-know2-name ")^ [ (" char-skill-know2-ranks ") + (" char-skill-know2-misc ") + (" '(nth 24 forms-fields) ") <Int> ]""\n"
+	   " " char-skill-know3 " - Knowledge(" char-skill-know3-name ")^ [ (" char-skill-know3-ranks ") + (" char-skill-know3-misc ") + (" '(nth 24 forms-fields) ") <Int> ]""\n"
+	   " " char-skill-know4 " - Knowledge(" char-skill-know4-name ")^ [ (" char-skill-know4-ranks ") + (" char-skill-know4-misc ") + (" '(nth 24 forms-fields) ") <Int> ]""\n"
+	   " " char-skill-noti " - Notice [ (" char-skill-noti-ranks ") + (" char-skill-noti-misc ") + (" '(nth 25 forms-fields) ") <Wis> ]""\n"
+	   " " char-skill-perf " - Perform(" char-skill-perf-name ") [ (" char-skill-perf-ranks ") + (" char-skill-perf-misc ") + (" '(nth 26 forms-fields) ") <Cha> ]""\n"
+	   " " char-skill-ride " - Ride^ [ (" char-skill-ride-ranks ") + (" char-skill-ride-misc ") + (" '(nth 22 forms-fields) ") <Dex> ]""\n"
+	   " " char-skill-sear " - Search [ (" char-skill-sear-ranks ") + (" char-skill-sear-misc ") + (" '(nth 24 forms-fields) ") <Int> ]""\n"
+	   " " char-skill-sens " - Sense Motive [ (" char-skill-sens-ranks ") + (" char-skill-sens-misc ") + (" '(nth 25 forms-fields) ") <Wis> ]""\n"
+	   " " char-skill-slei " - Sleight of Hand^* [ (" char-skill-slei-ranks ") + (" char-skill-slei-misc ") + (" '(nth 22 forms-fields) ") + (" '(nth 247 forms-fields)  ") <Dex> ]""\n"
+	   " " char-skill-stea " - Stealth* [ (" char-skill-stea-ranks ") + (" char-skill-stea-misc ") + (" '(nth 22 forms-fields) ") + (" '(nth 247 forms-fields)  ") <Dex> ]""\n"
+	   " " char-skill-surv " - Survival [ (" char-skill-surv-ranks ") + (" char-skill-surv-misc ") + (" '(nth 25 forms-fields) ") <Wis> ]""\n"
+	   " " char-skill-swim " - Swim* [ (" char-skill-swim-ranks ") + (" char-skill-swim-misc ") + (" '(nth 21 forms-fields) ") + 2 * (" '(nth 247 forms-fields)  ") <Str> ]""\n"
+	   " " char-skill-extr1 " - " char-skill-extr1-name"  [ (" char-skill-extr1-ranks ") + (" char-skill-extr1-misc ") + (" char-skill-extr1-stat ") <" char-skill-extr1-stat-name "> ]\n"
+	   " " char-skill-extr2 " - " char-skill-extr2-name"  [ (" char-skill-extr2-ranks ") + (" char-skill-extr2-misc ") + (" char-skill-extr2-stat ") <" char-skill-extr2-stat-name "> ]\n"
+	   " " char-skill-extr3 " - " char-skill-extr3-name"  [ (" char-skill-extr3-ranks ") + (" char-skill-extr3-misc ") + (" char-skill-extr3-stat ") <" char-skill-extr3-stat-name "> ]\n"
+	   " " char-skill-extr4 " - " char-skill-extr4-name"  [ (" char-skill-extr4-ranks ") + (" char-skill-extr4-misc ") + (" char-skill-extr4-stat ") <" char-skill-extr4-stat-name "> ]\n"
+	   " " char-skill-extr5 " - " char-skill-extr5-name"  [ (" char-skill-extr5-ranks ") + (" char-skill-extr5-misc ") + (" char-skill-extr5-stat ") <" char-skill-extr5-stat-name "> ]\n"
+	   " " char-skill-extr6 " - " char-skill-extr6-name"  [ (" char-skill-extr6-ranks ") + (" char-skill-extr6-misc ") + (" char-skill-extr6-stat ") <" char-skill-extr6-stat-name "> ]\n"
+	   "\nProfession Skill: " char-profession-skill ". \n"
+	   " ============================ \n"
+	   " ===== Feats & Abilities ==== \n"
+	   " Character Archetype: " char-hero-track "\n"
+	   " \n"
+           " Feats ([Book] pg #): \n " char-feats "\n"
+	   " Special Abilities ([Book] pg #): \n " char-abilities "\n"
+	   " -------------------- \n\n"
+	   " --- ERRATA BLOCK --- \n"
+	   " ===== Items & Movement ===== \n"
+	   " Movement - Normal: " '(nth 29 forms-fields) "' Accelerated(2x): " char-move-acc "' All-Out(4x): " char-move-all-out "'\n"
+	   " Loads    - Light: " char-light-load " lbs Medium: " char-med-load " lbs Heavy: " char-heavy-load " lbs\n"
+	   "            Max: " char-max-load " lbs Push/Drag: " char-push-load " lbs\n"
+	   " Current Load: " char-tot-load " lbs Type of Load: " char-load " Total Weight of Character: " char-tot-weight " lbs\n\n"
+	   " Equipment (weight in lbs): \n " char-equipment "\n"
+	   " Possessions (weight in lbs): \n " char-possessions "\n"
+	   " ============================ \n"
+	   " =========== Powers ========= \n"
+	   " Chosen Ability: " char-power-ability " (" char-power-ability-mod ") \n"
+	   " Power Bonus: " char-power-bonus " [ (" char-power-rank ") + (" '(nth 256 forms-fields) ") + (" char-power-misc ") ]\n"
+           " Power Save : " char-power-save " [ 10 + (" char-power-level ") + ("  '(nth 256 forms-fields) ") + (" char-power-save-misc ") ]\n"
+	   " Powers: \n " char-powers "\n"
+	   " ============================ \n"
+	   " =========== Others ========= \n"
+	   " Languages: \n " char-languages "\n"
+	   " Notes: \n " char-notes "\n"
+
+
+          ))

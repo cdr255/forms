@@ -1,0 +1,162 @@
+;; capes-characters.form - Capes Character Form, v1.0 -*- forms -*-
+     
+     ;; This provides a form for storing Capes Characters, v1.0
+     ;; Downloaded from cdr255.com.
+     
+     ;; Set the name of the data file.
+     (setq forms-file "chars-capes.dat")
+     
+     ;; Use forms-enumerate to set field names and number thereof.
+     (setq forms-number-of-fields
+           (forms-enumerate
+            '(char-name
+	      char-alterego
+	      char-creator
+	      char-role
+	      char-power-1
+	      char-power-1-box
+	      char-power-2
+	      char-power-2-box
+	      char-power-3
+	      char-power-3-box
+	      char-power-4
+	      char-power-4-box
+	      char-power-5
+	      char-power-5-box
+	      char-style-1
+	      char-style-1-box
+	      char-style-2
+	      char-style-2-box
+	      char-style-3
+	      char-style-3-box
+	      char-style-4
+	      char-style-4-box
+	      char-style-5
+	      char-style-5-box
+	      char-attitude-1
+	      char-attitude-1-box
+	      char-attitude-2
+	      char-attitude-2-box
+	      char-attitude-3
+	      char-attitude-3-box
+	      char-attitude-4
+	      char-attitude-4-box
+	      char-attitude-5
+	      char-attitude-5-box
+	      char-exemplar-1-name
+	      char-exemplar-1-drive
+	      char-exemplar-2-name
+	      char-exemplar-2-drive
+	      char-exemplar-3-name
+	      char-exemplar-3-drive
+	      char-exemplar-4-name
+	      char-exemplar-4-drive
+	      char-exemplar-5-name
+	      char-exemplar-5-drive
+	      char-undiff
+	      char-undiff-debt
+	      char-drive1
+	      char-drive1-str
+	      char-drive1-debt
+	      char-drive2
+	      char-drive2-str
+	      char-drive2-debt
+	      char-drive3
+	      char-drive3-str
+	      char-drive3-debt
+	      char-drive4
+	      char-drive4-str
+	      char-drive4-debt
+	      char-drive5
+	      char-drive5-str
+	      char-drive5-debt
+)))
+     
+     ;; The following functions are used by this form for layout purposes.
+     ;;
+     (defun arch-tocol (target &optional fill)
+       "Produces a string to skip to column TARGET.
+     Prepends newline if needed.
+     The optional FILL should be a character, used to fill to the column."
+       (if (null fill)
+           (setq fill ? ))
+       (if (< target (current-column))
+           (concat "\n" (make-string target fill))
+         (make-string (- target (current-column)) fill)))
+     ;;
+     (defun arch-rj (target field &optional fill)
+       "Produces a string to skip to column TARGET\
+      minus the width of field FIELD.
+     Prepends newline if needed.
+     The optional FILL should be a character,
+     used to fill to the column."
+       (arch-tocol (- target (length (nth field forms-fields))) fill))
+     
+     ;; Record filters.
+     ;;
+     (defun new-record-filter (the-record)
+       "Form a new record with some defaults."
+       (aset the-record char-name "Iron Man")
+       (aset the-record char-alterego "Tony Stark")
+       the-record)                           ; return it
+     (setq forms-new-record-filter 'new-record-filter)
+     
+     ;; The format list.
+     (setq forms-format-list
+          (list
+            "====== Character Sheet ======\n\n"
+            "Name: "                 char-name
+            " - "                    char-alterego
+	    "\n\n"
+	    "Role: "                 char-role
+	    "\n\n"
+	    "Created By: "           char-creator
+	    "\n\n"
+            '(arch-tocol 70 ?-)
+            "\n== Abilities ==\n\n"
+	    "\n\n-- Left Column (Powers/Skills) --\n\n"
+	    char-power-1 " - " char-power-1-box "\n"
+	    char-power-2 " - " char-power-2-box "\n"
+	    char-power-3 " - " char-power-3-box "\n"
+	    char-power-4 " - " char-power-4-box "\n"
+	    char-power-5 " - " char-power-5-box "\n"
+	    "\n\n-- Middle Column (Styles) --\n\n"
+	    char-style-1 " - " char-style-1-box "\n"
+	    char-style-2 " - " char-style-2-box "\n"
+	    char-style-3 " - " char-style-3-box "\n"
+	    char-style-4 " - " char-style-4-box "\n"
+	    char-style-5 " - " char-style-5-box "\n"
+	    "\n\n-- Right Column (Attitudes) --\n\n"
+	    char-attitude-1 " - " char-attitude-1-box "\n"
+	    char-attitude-2 " - " char-attitude-2-box "\n"
+	    char-attitude-3 " - " char-attitude-3-box "\n"
+	    char-attitude-4 " - " char-attitude-4-box "\n"
+	    char-attitude-5 " - " char-attitude-5-box "\n\n"
+	    '(arch-tocol 70 ?-)
+	    "\n== Exemplars ==\n\n"
+
+	    "1. " char-exemplar-1-name " for drive " char-exemplar-1-drive "\n"
+	    "2. " char-exemplar-2-name " for drive " char-exemplar-2-drive "\n"
+	    "3. " char-exemplar-3-name " for drive " char-exemplar-3-drive "\n"
+	    "4. " char-exemplar-4-name " for drive " char-exemplar-4-drive "\n"
+	    "5. " char-exemplar-5-name " for drive " char-exemplar-5-drive "\n"
+
+	    "\n== Drives ==\n\n"
+	    "Undifferentiated? (Y/N) "              char-undiff 
+	    "\nDebt (Overdraws at 5): "             char-undiff-debt
+	    "\n\nDrive 1: "                         char-drive1
+	    " Strength: "                           char-drive1-str
+	    "\nDebt: "                              char-drive1-debt
+	    "\n\nDrive 2: "                         char-drive2
+	    " Strength: "                           char-drive2-str
+	    "\nDebt: "                              char-drive2-debt
+	    "\n\nDrive 3: "                         char-drive3
+	    " Strength: "                           char-drive3-str
+	    "\nDebt: "                              char-drive3-debt
+	    "\n\nDrive 4: "                         char-drive4
+	    " Strength: "                           char-drive4-str
+	    "\nDebt: "                              char-drive4-debt
+	    "\n\nDrive 5: "                         char-drive5
+	    " Strength: "                           char-drive5-str
+	    "\nDebt: "                              char-drive5-debt
+          ))

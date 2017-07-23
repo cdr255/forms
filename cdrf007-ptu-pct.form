@@ -1,0 +1,228 @@
+;; ptu-trainers.form - Pokemon Tabletop United Trainer Sheet, v1.0 -*- forms -*-
+     
+     ;; This provides a forms based Trainer Sheet for PTU.
+     ;; Downloaded from cdr255.com.
+     
+     ;; Set the name of the data file.
+     (setq forms-file "chars-ptu-trainers.dat")
+     
+     ;; Use forms-enumerate to set field names and number thereof.
+     (setq forms-number-of-fields
+           (forms-enumerate
+            '(char-name
+	      char-player
+	      char-gender
+	      char-campaign
+	      char-age                       ; 5
+	      char-date
+	      char-background
+	      char-height
+	      char-size
+	      char-weight                    ; 10
+	      char-desc
+	      char-acrobatics
+	      char-acro-name
+	      char-athletics
+	      char-athl-name                 ; 15
+	      char-combat
+	      char-comb-name
+	      char-intimidate
+	      char-inti-name
+	      char-stealth                   ; 20
+	      char-stea-name
+	      char-survival
+	      char-surv-name
+	      char-generaledu
+	      char-gene-name                 ; 25
+	      char-medicineedu
+	      char-medi-name
+	      char-occultedu
+	      char-occu-name
+	      char-pokemonedu                ; 30
+	      char-poke-name
+	      char-technologyedu
+	      char-tech-name
+	      char-guile
+	      char-guil-name                 ; 35
+	      char-perception
+	      char-perc-name
+	      char-charm
+	      char-char-name
+	      char-command                   ; 40
+	      char-comm-name
+	      char-focus
+	      char-focu-name
+	      char-intuition
+	      char-intu-name                 ; 45
+	      char-overland
+	      char-swim
+	      char-power
+	      char-throwing
+	      char-jump-l                    ; 50
+	      char-jump-h
+	      char-capabilities-other
+	      char-level
+	      char-exp
+	      char-ap                        ; 55
+	      char-hit-points
+	      char-injuries
+	      char-hp
+	      char-atk
+	      char-def                       ; 60
+	      char-spatk
+	      char-spdef
+	      char-spd
+	      char-evade-physical
+	      char-evade-special             ; 65
+	      char-evade-speed
+	      char-abilities-other
+	      char-class1-name
+	      char-class1-features
+	      char-class2-name               ; 70
+	      char-class2-features
+	      char-class3-name
+	      char-class3-features
+	      char-class4-name
+	      char-class4-features           ; 75
+	      char-edges
+	      char-gen-features
+	      char-moves
+	      char-equip-head
+	      char-equip-body                ; 80
+	      char-equip-main
+	      char-equip-off
+	      char-equip-feet
+	      char-equip-acc
+	      char-money                     ; 85
+	      char-items
+	      char-create-plus
+	      char-create-minus
+	      char-create-hp
+	      char-create-atk                ; 90
+	      char-create-def
+	      char-create-spatk
+	      char-create-spdef
+	      char-create-spd
+	      char-create-edges              ; 95
+	      char-create-features
+	      char-create-train
+	      char-create-notes
+	      char-progression
+	      )))
+     
+     ;; The following functions are used by this form for layout purposes.
+     ;;
+     (defun arch-tocol (target &optional fill)
+       "Produces a string to skip to column TARGET.
+     Prepends newline if needed.
+     The optional FILL should be a character, used to fill to the column."
+       (if (null fill)
+           (setq fill ? ))
+       (if (< target (current-column))
+           (concat "\n" (make-string target fill))
+         (make-string (- target (current-column)) fill)))
+     ;;
+     (defun arch-rj (target field &optional fill)
+       "Produces a string to skip to column TARGET\
+      minus the width of field FIELD.
+     Prepends newline if needed.
+     The optional FILL should be a character,
+     used to fill to the column."
+       (arch-tocol (- target (length (nth field forms-fields))) fill))
+     
+     ;; Record filters.
+     ;;
+     (defun new-record-filter (the-record)
+       "Form a new record with some defaults."
+       (aset the-record char-player (user-full-name))
+       (aset the-record char-date (current-time-string))
+       the-record)                           ; return it
+       (setq forms-new-record-filter 'new-record-filter)
+     
+     ;; The format list.
+     (setq forms-format-list
+          (list
+	   "====== PTU Trainer Sheet v1.0 (cdr255) ======\n\n"
+	   " --- DETAIL BLOCK --- \n\n"
+	   "Name: " char-name " Player: " char-player "\n"
+	   "Gender: " char-gender " Campaign: " char-campaign "\n"
+	   "Age: " char-age " Date Created: " char-date "\n"
+	   "Background: " char-background "\n"
+	   "Height (Size): " char-height "(" char-size ") Weight: " char-weight "\n"
+	   "Description:\n" char-desc "\n\n"
+	   " -------------------- \n"
+	   " --- SKILL  BLOCK --- \n\n"
+	   "[BODY]\n"
+	   "Acrobatics: " char-acrobatics "d6 (" char-acro-name ")\n"
+	   "Athletics: " char-athletics "d6 (" char-athl-name ")\n"
+	   "Combat: " char-combat"d6 (" char-comb-name ")\n"
+	   "Intimidate: " char-intimidate "d6 (" char-inti-name ")\n"
+	   "Stealth: " char-stealth "d6 (" char-stea-name ")\n"
+	   "Survival: " char-survival "d6 (" char-surv-name ")\n"
+	   "[MIND]\n"
+	   "General Education: " char-generaledu "d6 (" char-gene-name ")\n"
+	   "Medicine Education: " char-medicineedu "d6 (" char-medi-name ")\n"
+	   "Occult Education: " char-occultedu "d6 (" char-occu-name ")\n"
+	   "Pokemon Education: " char-pokemonedu "d6 (" char-poke-name ")\n"
+	   "Technology Education: " char-technologyedu "d6 (" char-tech-name ")\n"
+	   "Guile: " char-guile "d6 (" char-guil-name ")\n"
+	   "Perception: " char-perception "d6 (" char-perc-name ")\n"
+	   "[SPIRIT]\n"
+	   "Charm: " char-charm "d6 (" char-char-name ")\n"
+	   "Command: " char-command "d6 (" char-comm-name ")\n"
+	   "Focus: " char-focus "d6 (" char-focu-name ")\n"
+	   "Intuition: " char-intuition "d6 (" char-intu-name ")\n"
+	   " -------------------- \n"
+	   " --- CAPABILITIES --- \n\n"
+	   "[Over: 3+(" '(nth 12 forms-fields) "+" '(nth 14 forms-fields) ")/2 Swim: " '(nth 46 forms-fields) "/2 Throw: 4+" '(nth 14 forms-fields) "]\n"
+	   "Overland: " char-overland " Swim: " char-swim " Power: " char-power "\n"
+	   "Throwing: " char-throwing " Jump: " char-jump-l "(L) " char-jump-h "(H)\n"
+	   "Others:\n" char-capabilities-other "\n\n"
+	   " -------------------- \n"
+	   " ---- STAT BLOCK ---- \n\n"
+	   " Level: " char-level " EXP: " char-exp " / 10\n"
+	   " Action Points: " char-ap "\n"
+	   " Hit Points: " char-hit-points "\n"
+	   " Injuries: " char-injuries "\n"
+	   " HP: " char-hp " Atk: " char-atk " Def: " char-def " Sp.Atk: " char-spatk " Sp.Def: " char-spdef " Spd: " char-spd "\n"
+	   " Evasion: Physical: " char-evade-physical " Special: " char-evade-special " Speed: " char-evade-speed "\n"
+	   " Abilities:\n" char-abilities-other "\n\n"
+	   " -------------------- \n"
+	   " --- CLASS  BLOCK --- \n\n"
+	   " '" char-class1-name "' Features:\n" char-class1-features "\n\n"
+	   " '" char-class2-name "' Features:\n" char-class2-features "\n\n"
+	   " '" char-class3-name "' Features:\n" char-class3-features "\n\n"
+	   " '" char-class4-name "' Features:\n" char-class4-features "\n\n"
+	   " -------------------- \n"
+	   " ---- GEN  BLOCK ---- \n\n"
+	   " Edges:\n" char-edges "\n\n"
+	   " General Features:\n" char-gen-features "\n\n"
+	   " Moves:\n" char-moves "\n\n"
+	   " -------------------- \n"
+	   " --- EQUIP  BLOCK --- \n\n"
+	   " Head: " char-equip-head "\n"
+	   " Body: " char-equip-body "\n"
+	   " Main-Hand: " char-equip-main "\n"
+	   " Off-Hand: " char-equip-off "\n"
+	   " Feet: " char-equip-feet "\n"
+	   " Accessory: " char-equip-acc "\n"
+	   " Money: " char-money "\n"
+	   " Items (#):\n" char-items "\n\n"
+	   " -------------------- \n"
+	   " ---- LOG  BLOCK ---- \n\n"
+	   " [Character Creation]\n"
+	   " Background Name: " '(nth 7 forms-fields) "\n"
+	   " + Skills: " char-create-plus "\n"
+	   " - Skills: " char-create-minus "\n"
+	   " STARTING STATS:\n"
+	   " HP: " char-create-hp " Atk: " char-create-atk " Def: " char-create-def " Sp.Atk: " char-create-spatk " Sp.Def: " char-create-spdef " Spd: " char-create-spd "\n"
+	   " Level 1 Edges:\n" char-create-edges "\n\n"
+	   " Level 1 Features:\n" char-create-features "\n\n"
+	   " Training Feature: " char-create-train "\n"
+	   " Notes:\n" char-create-notes "\n\n"
+	   " [Progression (Level - Edge/Feature - Stat Point)]\n" char-progression "\n"
+	   
+	   
+
+
+          ))

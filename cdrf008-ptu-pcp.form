@@ -1,0 +1,222 @@
+;; ptu-pokemon.form - Pokemon Tabletop United Pokemon Sheet, v1.0 -*- forms -*-
+     
+     ;; This provides a forms based Pokemon Sheet for PTU.
+     ;; Downloaded from cdr255.com.
+     
+     ;; Set the name of the data file.
+     (setq forms-file "chars-ptu-pokemon.dat")
+     
+     ;; Use forms-enumerate to set field names and number thereof.
+     (setq forms-number-of-fields
+           (forms-enumerate
+            '(char-name                       
+	      char-player                     
+	      char-created
+	      char-campaign
+	      ; 5
+	      char-species                      
+	      char-sex                        
+	      char-size
+	      char-height
+	      char-weight
+	      ; 10
+	      char-type
+	      char-desc
+	      char-level
+	      char-expr
+	      char-hps
+					; 15
+	      char-atk
+	      char-def
+	      char-sat
+	      char-sdf
+	      char-spd
+					; 20
+	      char-stpt
+	      char-hitp
+	      char-damg
+	      char-over
+	      char-swim
+					; 25
+	      char-jump
+	      char-power
+	      char-cap-others
+	      char-skills
+	      char-loyal
+					; 30
+	      char-phye
+	      char-spce
+	      char-spde
+	      char-injr
+	      char-abil-1
+					; 35
+	      char-abil-2
+	      char-abil-3
+	      char-abil-4
+	      char-abil-5
+	      char-abil-6
+					; 40
+	      char-abil-7
+	      char-abil-8
+	      char-mov1-name
+	      char-mov1-freq
+	      char-mov1-ac
+					; 45
+	      char-mov1-type
+	      char-mov1-droll
+	      char-mov1-dtype
+	      char-mov1-range
+	      char-mov1-contest
+					; 50
+	      char-mov1-spec
+	      char-mov2-name
+	      char-mov2-freq
+	      char-mov2-ac
+	      char-mov2-type
+					; 55
+	      char-mov2-droll
+	      char-mov2-dtype
+	      char-mov2-range
+	      char-mov2-contest
+	      char-mov2-spec
+					; 60
+	      char-mov3-name
+	      char-mov3-freq
+	      char-mov3-ac
+	      char-mov3-type
+	      char-mov3-droll
+					; 65
+	      char-mov3-dtype
+	      char-mov3-range
+	      char-mov3-contest
+	      char-mov3-spec
+	      char-mov4-name
+					; 70
+	      char-mov4-freq
+	      char-mov4-ac
+	      char-mov4-type
+	      char-mov4-droll
+	      char-mov4-dtype
+					; 75
+	      char-mov4-range
+	      char-mov4-contest
+	      char-mov4-spec
+	      char-mov5-name
+	      char-mov5-freq
+					; 80
+	      char-mov5-ac
+	      char-mov5-type
+	      char-mov5-droll
+	      char-mov5-dtype
+	      char-mov5-range
+					; 85
+	      char-mov5-contest
+	      char-mov5-spec
+	      char-mov6-name
+	      char-mov6-freq
+	      char-mov6-ac
+					; 90
+	      char-mov6-type
+	      char-mov6-droll
+	      char-mov6-dtype
+	      char-mov6-range
+	      char-mov6-contest
+					; 95
+	      char-mov6-spec
+	      char-cool
+	      char-tough
+	      char-beauty
+	      char-smart
+	      char-cute
+					; 100
+	      char-tutor
+	      char-poffins
+	      char-notes
+	      char-nature
+	      char-tut-spent
+					; 105
+	      char-tut-left
+	      char-tut-total
+	      )))
+     
+     ;; The following functions are used by this form for layout purposes.
+     ;;
+     (defun arch-tocol (target &optional fill)
+       "Produces a string to skip to column TARGET.
+     Prepends newline if needed.
+     The optional FILL should be a character, used to fill to the column."
+       (if (null fill)
+           (setq fill ? ))
+       (if (< target (current-column))
+           (concat "\n" (make-string target fill))
+         (make-string (- target (current-column)) fill)))
+     ;;
+     (defun arch-rj (target field &optional fill)
+       "Produces a string to skip to column TARGET\
+      minus the width of field FIELD.
+     Prepends newline if needed.
+     The optional FILL should be a character,
+     used to fill to the column."
+       (arch-tocol (- target (length (nth field forms-fields))) fill))
+     
+     ;; Record filters.
+     ;;
+     (defun new-record-filter (the-record)
+       "Form a new record with some defaults."
+       (aset the-record char-player (user-full-name))
+       (aset the-record char-created (current-time-string))
+       the-record)                           ; return it
+       (setq forms-new-record-filter 'new-record-filter)
+     
+     ;; The format list.
+     (setq forms-format-list
+          (list
+	   "====== PTU Pokémon Sheet v1.0 (cdr255) ======\n\n"
+	   " --- DETAIL BLOCK --- \n"
+	   " Name: " char-name " Trainer: " char-player " Created: " char-created "\n"
+	   " Sex: " char-sex " Size: " char-size " Campaign: " char-campaign "\n"
+	   " Height: " char-height " Weight (Class): " char-weight " Nature (+/-): " char-nature "\n"
+	   " Species: " char-species "\n"
+	   " Type: " char-type "\n"
+	   " Description: " char-desc "\n"
+	   " Loyalty: " char-loyal "\n"
+	   " Level: " char-level "\n"
+	   " EXP (Total/Next): " char-expr "\n"
+	   " -------------------- \n\n"
+	   " --- STATS  BLOCK --- \n"
+	   " ========+    --------- [ Hit Points = Level + (HP * 3) + 10. ] --------- \n"
+	   " HP : " char-hps " |    Hit Points: " char-hitp " [ (" '(nth 12 forms-fields) ") + (" '(nth 14 forms-fields)" * 3) + 10 ]\n"
+	   " Atk: " char-atk " |        Damage: " char-damg "\n"
+	   " Def: " char-def " |    ---- [ Capabilities: See Pokedex for Info ] ---- \n" 
+	   " SAt: " char-sat " |    Overland: " char-over   ", Swim: " char-swim ", Jump (High/Long)" char-jump ", Power: " char-power "\n"
+	   " SDf: " char-sdf " |    Others: \n"
+	   " Spd: " char-spd " |      " char-cap-others "\n"
+	   " --------+    ---- [ Skills: See Pokedex for Basics, GM for more ] ---- \n"
+	   " --------+    " char-skills "\n"
+	   " Stat Pts: " char-stpt " -- Combat Abilities and Moves ---  \n"
+	   " Phys Eva: " char-phye " Abilities: \n"
+	   " Spec Eva: " char-spce "   " char-abil-1 " / " char-abil-2 " / " char-abil-3 " / " char-abil-4 "\n"
+	   " Sped Eva: " char-spde "   " char-abil-5 " / " char-abil-6 " / " char-abil-7 " / " char-abil-8 "\n"
+	   " Injuries: " char-injr " Moves: [Name - Freq - AC - Type \n"
+	   " --------+                       Dam - Class - Rng  - Con Stat]\n"
+	   " --------+     1. " char-mov1-name " - " char-mov1-freq " - " char-mov1-ac " - " char-mov1-type "\n"
+           " Cool:  +" char-cool "d6     " char-mov1-droll " - " char-mov1-dtype " - " char-mov1-range " - " char-mov1-contest "\n"
+	   " Tough: +" char-tough "d6      Eff (Con):"  char-mov1-spec "\n"
+	   " Beauty:+" char-beauty "d6   2. " char-mov2-name " - " char-mov2-freq " - " char-mov2-ac " - " char-mov2-type "\n"
+           " Smart: +" char-smart "d6       " char-mov2-droll " - " char-mov2-dtype " - " char-mov2-range " - " char-mov2-contest "\n"
+	   " Cute:  +" char-cute "d6      Eff (Con):" char-mov2-spec "\n"
+	   " [Base / 10]   3. " char-mov3-name " - " char-mov3-freq " - " char-mov3-ac " - " char-mov3-type "\n"
+           " --------+        " char-mov3-droll " - " char-mov3-dtype " - " char-mov3-range " - " char-mov3-contest "\n"
+	   " Tutor Points     Eff (Con):" char-mov3-spec "\n"
+	   " Spent: " char-tut-spent "      4. " char-mov4-name " - " char-mov4-freq " - " char-mov4-ac " - " char-mov4-type "\n"
+           " Left:  " char-tut-left "          " char-mov4-droll " - " char-mov4-dtype " - " char-mov4-range " - " char-mov4-contest "\n"
+	   " Total: " char-tut-total "         Eff (Con):" char-mov4-spec "\n"
+	   "               5. " char-mov5-name " - " char-mov5-freq " - " char-mov5-ac " - " char-mov5-type "\n"
+           "                  " char-mov5-droll " - " char-mov5-dtype " - " char-mov5-range " - " char-mov5-contest "\n"
+	   "                  Eff (Con):" char-mov5-spec "\n"
+	   "               6. " char-mov6-name " - " char-mov6-freq " - " char-mov6-ac " - " char-mov6-type "\n"
+           "                  " char-mov6-droll " - " char-mov6-dtype " - " char-mov6-range " - " char-mov6-contest "\n"
+	   "                  Eff (Con):" char-mov6-spec "\n"
+	   " Edge / Tutor Items (cost): \n " char-tutor "\n Poffins / Vitamins: \n " char-poffins "\n Notes: \n " char-notes "\n" 
+	   
+          ))
